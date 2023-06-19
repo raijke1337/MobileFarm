@@ -21,7 +21,8 @@ public class Enums
         Pail,
         Shovel,
         Sickle,
-        Seed
+        Seed,
+        Fruit
     }
 
     public enum SoilState : byte

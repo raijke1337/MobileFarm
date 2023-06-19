@@ -6,6 +6,9 @@ namespace Farm.Game
     [RequireComponent(typeof(Animation),typeof(SpriteRenderer))]
     public class Item : MonoBehaviour
     {
+
+        [SerializeField] protected string _itemName;
+        public string ItemName { get => _itemName; }
         public ItemType Type;
         public Vector3 InstantiateOffset = Vector3.zero;
         public Vector3 InstantiateScale = Vector3.one;  
@@ -20,7 +23,7 @@ namespace Farm.Game
         private float _currentCd;
         public bool IsBusy { get; private set; }
 
-        private void Start()
+        protected virtual void Start()
         {
             IsBusy = false;
             //_animator = GetComponent<Animator>();
@@ -36,7 +39,7 @@ namespace Farm.Game
             return true;
             //_animator.SetTrigger("Use");
         }
-        protected void Update()
+        protected virtual void Update()
         {
             if (_currentCd > 0)
             {

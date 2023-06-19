@@ -1,6 +1,7 @@
 using Farm.Game;
 using Farm.Game.Entities;
 using Farm.Game.UI;
+using System.Collections.Generic;
 using UnityEngine;
 using static Enums;
 
@@ -23,24 +24,30 @@ namespace Farm
         }
         #endregion
 
-        [SerializeField] private Unit _player;
+        [SerializeField] private Unit _playerPrefab;
+        private Unit _player;
+
+        private List<Unit> _units = new List<Unit>();
         public GameState CurrentState;
 
         [Space,SerializeField] private GameCanvasController _canvasPrefab;
+        [SerializeField] private Transform _gameGrid; // MASSIVE TODO
+
+
 
         private GameCanvasController _canvas;
 
         public Unit GetPlayer { get { return _player; } }  
 
-        public void RegisterUnit(Unit unit)
-        {
-            _player = unit;
-        }
+        public void RegisterUnit(Unit unit) => _units.Add(unit);    
 
         private void Start()
         {
             if (CurrentState == GameState.Gameplay)
             {
+
+                _player = Instantiate(_playerPrefab,_gameGrid);
+
                 _canvas = Instantiate(_canvasPrefab);
                 _canvas.Init();
             }
